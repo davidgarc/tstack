@@ -1,9 +1,11 @@
 # tstack
 
-The agent skills I use every day, cleaned up so anyone can use them. They work
-in Claude Code and Codex. Some use [T3 Code](https://github.com/pingdotgg/t3code)
-features when they are available and fall back to native tools when they are
-not.
+My curated set of everyday agent skills. They work in Claude Code and Codex.
+Some use [T3 Code](https://github.com/pingdotgg/t3code) features when they are
+available and fall back to native tools when they are not.
+
+Forked from [t3dotgg/tstack](https://github.com/t3dotgg/tstack). Upstream
+changes are pulled in selectively.
 
 ## Skills
 
@@ -29,9 +31,20 @@ Some skills call others. Install the ones they need too:
 ## Install
 
 ```bash
-git clone https://github.com/t3dotgg/tstack
-cp -R tstack/skills/* ~/.claude/skills/   # Claude Code
-cp -R tstack/skills/* ~/.codex/skills/    # Codex
+git clone https://github.com/davidgarc/tstack ~/Projects/tstack
+~/Projects/tstack/install.sh
+```
+
+`install.sh` symlinks each skill into `~/.agents/skills`, then links those into
+`~/.claude/skills` (Claude Code) and `~/.codex/skills` (Codex). A `git pull`
+updates every install. Existing skills that are not symlinks are left alone.
+
+## Syncing upstream
+
+```bash
+git fetch upstream
+git log main..upstream/main   # review before merging
+git merge upstream/main
 ```
 
 ## Requirements
@@ -42,11 +55,10 @@ cp -R tstack/skills/* ~/.codex/skills/    # Codex
   does this with `delegate_task`. Otherwise you need a harness that can run
   those models.
 
-## Make them yours
+## Personal settings
 
-These are starting points. Edit them. Put personal settings, like which models
-sit on your council, in your `CLAUDE.md` or `AGENTS.md`, so you can update the
-skills without losing them.
+Put personal settings, like which models sit on the council, in `CLAUDE.md` or
+`AGENTS.md`, so the skills can change without losing them.
 
 ## License
 
